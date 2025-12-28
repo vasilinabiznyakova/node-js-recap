@@ -43,54 +43,13 @@ app.use(express.urlencoded({ extended: false }));
 //built-in middleware for json
 app.use(express.json());
 
-app.use(express.static(path.join(__dirname, '/public')));
+app.use('/', express.static(path.join(__dirname, '/public')));
+app.use('/subdir', express.static(path.join(__dirname, '/public')));
 
-app.get(/^\/$|\/index\.html$/, (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'index.html'));
-});
-
-app.get(/^\/new-page(\.html)?$/, (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'new-page.html'));
-});
-
-app.get(/^\/old-page(\.html)?$/, (req, res) => {
-  res.redirect(301, 'new-page.html'); //302 by default
-});
-
-app.get(
-  /^\/hello(\.html)?$/,
-  (req, res, next) => {
-    console.log('attempted to load hello.html ');
-    next(); //moves on to the next handler / next expression in the chain
-  },
-  (req, res) => {
-    res.send('Hello World');
-  }
-);
-
-//Middleware is any handlers being invoked between req and response
-//there are 3 types of middlewares:
-//1) built-in middleware
-//2)  from 3rd party
-//3)  custom
-//You can chan them or chain them in array
-
-const one = (req, res, next) => {
-  console.log('one');
-  next();
-};
-const two = (req, res, next) => {
-  console.log('two');
-  next();
-};
-
-const three = (req, res, next) => {
-  console.log('three');
-  res.send('Finished!');
-};
-
-// chaining handlers can be passed as array
-app.get(/^\/chain(\.html)?$/, [one, two, three]);
+//routes 
+app.use('/', require('./routes/root'));
+app.use('/subdir', require('./routes/subdir'));
+app.use('/employees', require('./routes/api/employees'))
 
 // Route handlers
 // app all will be applied to all http methods
@@ -109,6 +68,5 @@ app.all(/.*/, (req, res) => {
 app.use(errorHandler);
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
 
 //2.58.35
