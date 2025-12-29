@@ -3,6 +3,7 @@ const app = express();
 
 const path = require('path');
 const cors = require('cors');
+const corsOptions = require('./config/corsOptions');
 const { logger } = require('./middleware/logEvents');
 const errorHandler = require('./middleware/errorHandler');
 
@@ -10,46 +11,20 @@ const PORT = process.env.PORT || 3500;
 
 //custom middleware logger
 app.use(logger);
-
-//3rd party middleware
-// Cross Origin Resourse Sharing
-// does need to be applied, you can send req from any domains heere and for public its ok
-
-// better to create whitelist for domains that can have access to your application
-const whitelist = [
-  'https://www.yoursite.com',
-  'https://www.google.com',
-  'http://127.0.0.1:5500',
-  'http://localhost:3500',
-];
-const corsOptions = {
-  origin: (origin, callback) => {
-    // TODO: REMOVE !origin in production
-    if (whitelist.indexOf(origin) !== -1 || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  optionsSuccessStatus: 200,
-};
+//Cross Origin Resourse Sharing
 app.use(cors(corsOptions));
 
-// built-in middleware to handle urlencoded data
-// in other words, form data:
-// ‘content-type: application/x-www-form-urlencoded’
+// built-in middleware to handle urlencoded form data
 app.use(express.urlencoded({ extended: false }));
 
 //built-in middleware for json
 app.use(express.json());
 
 app.use('/', express.static(path.join(__dirname, '/public')));
-app.use('/subdir', express.static(path.join(__dirname, '/public')));
 
-//routes 
+//routes
 app.use('/', require('./routes/root'));
-app.use('/subdir', require('./routes/subdir'));
-app.use('/employees', require('./routes/api/employees'))
+app.use('/employees', require('./routes/api/employees'));
 
 // Route handlers
 // app all will be applied to all http methods
