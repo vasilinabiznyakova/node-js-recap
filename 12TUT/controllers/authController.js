@@ -27,11 +27,18 @@ const handleLogin = async (req, res) => {
   //evaluate password
   const match = await bcrypt.compare(pwd, foundUser.password);
   if (match) {
+    const roles = Object.values(foundUser.roles);
     //create JWTs(normal and refresh)
     // 1st arg = payload
     //Payload is the actual data being transmitted inside a request, message, or token. In JWT, the payload contains claims such as user identity and token metadata, and it is Base64-encoded but not encrypted.
+    // no need to send the role is refresh token, only access token is ok to save this, frontend should take care of saving the role
     const accessToken = jwt.sign(
-      { username: foundUser.username },
+      {
+        UserInfo: {
+          username: foundUser.username,
+          roles: roles,
+        },
+      },
       process.env.ACCESS_TOKEN_SECRET,
       { expiresIn: '30s' } // TODO change for prod to 5 - 15 min
     );
