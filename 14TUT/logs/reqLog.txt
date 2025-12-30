@@ -44,3 +44,5 @@
 20251230	14:52:43	40d45fc6-018f-491e-8274-9fa9a00796d2	DELETE	undefined	/employees
 20251230	14:52:55	163119ab-f8cf-48ef-8660-d9b0e567b41c	POST	undefined	/auth
 20251230	14:53:07	caf9d0ce-376d-4a46-82c4-dacb03e708fc	DELETE	undefined	/employees
+20251230	19:57:13	81f7abea-95ed-4443-be3a-e072c1f1125e	POST	undefined	/register
+20251230	19:58:27	7ee3753d-0cf9-4082-a8e3-bdcb44bcce56	POST	undefined	/register
