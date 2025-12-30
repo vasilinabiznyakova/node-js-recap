@@ -1,6 +1,3 @@
-
-20251227	23:36:54	8a23bf2c-5533-4d75-a0cb-ef7cef037db8	Error: Not allowed by CORS
-20251227	23:36:54	9fff5717-067d-4604-88fb-3eca76a906b9	Error: Not allowed by CORS
-20251229	10:40:09	3fbc119b-65bd-46e4-bed5-86c68d117980	TypeError: Cannot read properties of undefined (reading 'id')
-20251229	10:40:34	77c740e6-fbd5-4412-9d8a-98bbddf5a033	TypeError: Cannot read properties of undefined (reading 'id')
-20251229	10:49:18	357fd31a-2d03-480c-9b50-d94f089a0c85	ReferenceError: employees is not defined
+20251230	11:25:57	73fc1de0-abb8-4667-a930-7aa98eb302c9	TypeError: Cannot read properties of undefined (reading 'filter')
+20251230	11:26:22	7ec7071f-2dae-439a-a4be-f3384ccaa363	TypeError: Cannot read properties of undefined (reading 'filter')
+20251230	11:26:53	fbfff60e-78c3-439a-a34f-768557bf1a9c	ReferenceError: path is not defined
