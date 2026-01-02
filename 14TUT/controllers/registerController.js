@@ -1,7 +1,4 @@
 const User = require('../model/User');
-
-const fsPromises = require('fs').promises;
-const path = require('path');
 const bcrypt = require('bcrypt');
 //bcrypt help us to hash and salt the password so that we could store them in db, there is a native module crypto in nodejs but hystorically bcrypt is more reliable for passwrods, its being used more than 20 years
 //It’s intentionally slow, manages salts internally, and reduces the risk of implementation mistakes. Native options like scrypt are also valid, but bcrypt remains a common and safe default.
